@@ -1805,3 +1805,227 @@ body {
     }
 
 }
+
+/* =====================================================
+   BIRTHDAY MISSION COUNTDOWN
+   ===================================================== */
+
+.mission-countdown {
+    margin-top: 10px;
+    padding: 10px 14px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(70, 150, 255, 0.12),
+            rgba(150, 100, 255, 0.10)
+        );
+
+    border: 1px solid
+        rgba(100, 160, 255, 0.25);
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 15px
+        rgba(50, 100, 200, 0.08);
+}
+
+
+/* =====================================================
+   COUNTDOWN LABEL
+   ===================================================== */
+
+.countdown-label {
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    opacity: 0.65;
+
+    margin-bottom: 4px;
+
+}
+
+
+/* =====================================================
+   COUNTDOWN TIME
+   ===================================================== */
+
+.countdown-time {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    font-variant-numeric:
+        tabular-nums;
+
+    white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   AVAILABLE
+   ===================================================== */
+
+.countdown-available {
+
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(60, 180, 130, 0.18),
+            rgba(80, 150, 255, 0.18)
+        );
+
+    border: 1px solid
+        rgba(80, 170, 140, 0.3);
+
+    animation:
+        missionAvailablePulse
+        2s ease-in-out infinite;
+
+}
+
+
+/* =====================================================
+   MANUAL LOCK
+   ===================================================== */
+
+.countdown-manual {
+
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    opacity: 0.6;
+
+}
+
+
+/* =====================================================
+   PULSE ANIMATION
+   ===================================================== */
+
+@keyframes missionAvailablePulse {
+
+    0% {
+
+        transform:
+            scale(1);
+
+        opacity:
+            0.75;
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.03);
+
+        opacity:
+            1;
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity:
+            0.75;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .mission-countdown {
+
+        margin-top: 8px;
+
+        padding: 9px 10px;
+
+    }
+
+
+    .countdown-label {
+
+        font-size: 9px;
+
+        letter-spacing: 1.5px;
+
+    }
+
+
+    .countdown-time {
+
+        font-size: 17px;
+
+        letter-spacing: 1.5px;
+
+    }
+
+
+    .countdown-available {
+
+        font-size: 10px;
+
+        padding: 6px 10px;
+
+    }
+
+}
+
+
+/* =====================================================
+   SMALL SCREEN
+   ===================================================== */
+
+@media (max-width: 380px) {
+
+    .countdown-time {
+
+        font-size: 15px;
+
+        letter-spacing: 1px;
+
+    }
+
+}
