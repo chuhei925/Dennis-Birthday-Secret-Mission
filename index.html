@@ -2,112 +2,376 @@
 <html lang="zh-HK">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="theme-color" content="#111111">
+    <meta
+        name="theme-color"
+        content="#dceeff"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
 
     <title>Birthday Secret Mission</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <div id="app">
+    <!-- Decorative background -->
 
-        <!-- HOME -->
-        <section id="home" class="screen active">
+    <div class="background-decoration">
 
-            <div class="hero">
+        <span class="star star-1">✦</span>
+        <span class="star star-2">✧</span>
+        <span class="star star-3">✦</span>
+        <span class="star star-4">✧</span>
+        <span class="star star-5">✦</span>
 
-                <div class="lock">🔐</div>
+        <span class="balloon balloon-1">🎈</span>
+        <span class="balloon balloon-2">🎈</span>
 
-                <h1>Birthday<br>Secret Mission</h1>
-
-                <p class="subtitle">
-                    A little adventure is waiting for you.
-                </p>
-
-                <button id="startBtn" class="main-btn">
-                    START MISSION
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- MISSIONS -->
-        <section id="missions" class="screen">
-
-            <div class="header">
-
-                <span class="small-title">
-                    BIRTHDAY 2026
-                </span>
-
-                <h2>Your Missions</h2>
-
-            </div>
-
-            <div id="missionList"></div>
-
-        </section>
-
-
-        <!-- MISSION DETAIL -->
-        <section id="missionDetail" class="screen">
-
-            <button id="backBtn" class="back-btn">
-                ← Back
-            </button>
-
-            <div id="missionContent"></div>
-
-        </section>
-
-
-        <!-- FINAL -->
-        <section id="final" class="screen">
-
-            <div class="final-content">
-
-                <div class="heart">❤️</div>
-
-                <h1>Happy Birthday</h1>
-
-                <p>
-                    I hope you enjoyed<br>
-                    this little adventure.
-                </p>
-
-                <div class="final-line"></div>
-
-                <h2>
-                    From Hong Kong<br>
-                    → Taiwan
-                </h2>
-
-                <p class="signature">
-                    This trip was planned<br>
-                    just for you.
-                </p>
-
-                <p class="from">
-                    — Dennis ❤️
-                </p>
-
-            </div>
-
-        </section>
+        <span class="sparkle sparkle-1">✧</span>
+        <span class="sparkle sparkle-2">✦</span>
+        <span class="sparkle sparkle-3">✧</span>
 
     </div>
 
+
+    <div id="app">
+
+
+        <!-- =========================================
+             HOME
+        ========================================== -->
+
+        <section
+            id="home"
+            class="screen active"
+        >
+
+            <div class="hero">
+
+                <div class="birthday-top">
+
+                    <span>✦</span>
+                    <span>HAPPY BIRTHDAY</span>
+                    <span>✦</span>
+
+                </div>
+
+
+                <div class="hero-icon">
+
+                    🎂
+
+                </div>
+
+
+                <div class="secret-label">
+
+                    CLASSIFIED • 2026
+
+                </div>
+
+
+                <h1>
+
+                    Birthday
+                    <br>
+
+                    <span>Secret Mission</span>
+
+                </h1>
+
+
+                <p class="subtitle">
+
+                    A little adventure
+                    <br>
+                    is waiting for you.
+
+                </p>
+
+
+                <div class="trip-preview">
+
+                    <div>
+
+                        <strong>20</strong>
+                        <small>AUG</small>
+
+                    </div>
+
+
+                    <div class="trip-arrow">
+
+                        →
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>24</strong>
+                        <small>AUG</small>
+
+                    </div>
+
+
+                    <div class="trip-location">
+
+                        🇭🇰 → 🇹🇼
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="startBtn"
+                    class="main-btn"
+                >
+
+                    <span>START MISSION</span>
+
+                    <span class="btn-arrow">→</span>
+
+                </button>
+
+
+                <p class="bottom-secret">
+
+                    🔐 CONFIDENTIAL
+                    <br>
+                    For Birthday Girl Only
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             MISSIONS
+        ========================================== -->
+
+        <section
+            id="missions"
+            class="screen"
+        >
+
+            <div class="header">
+
+                <div class="header-top">
+
+                    <span class="small-title">
+
+                        BIRTHDAY • 2026
+
+                    </span>
+
+                    <span class="header-stars">
+
+                        ✦ ✧ ✦
+
+                    </span>
+
+                </div>
+
+
+                <h2>
+
+                    Your Missions
+
+                </h2>
+
+
+                <p class="header-subtitle">
+
+                    Your birthday adventure starts here.
+
+                </p>
+
+            </div>
+
+
+            <div id="missionList"></div>
+
+
+            <div class="missions-footer">
+
+                ✈️ &nbsp; 20 — 24 AUGUST 2026 &nbsp; ✈️
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             MISSION DETAIL
+        ========================================== -->
+
+        <section
+            id="missionDetail"
+            class="screen"
+        >
+
+            <button
+                id="backBtn"
+                class="back-btn"
+            >
+
+                ← Your Missions
+
+            </button>
+
+
+            <div
+                id="missionContent"
+                class="mission-detail-content"
+            ></div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             FINAL
+        ========================================== -->
+
+        <section
+            id="final"
+            class="screen"
+        >
+
+            <div class="final-content">
+
+                <div class="final-decoration">
+
+                    ✦ &nbsp; ✧ &nbsp; ✦
+
+                </div>
+
+
+                <div class="heart">
+
+                    ❤️
+
+                </div>
+
+
+                <div class="final-small">
+
+                    MISSION COMPLETE
+
+                </div>
+
+
+                <h1>
+
+                    Happy Birthday
+
+                </h1>
+
+
+                <p>
+
+                    I hope you enjoyed
+                    <br>
+
+                    this little adventure.
+
+                </p>
+
+
+                <div class="final-line"></div>
+
+
+                <div class="final-route">
+
+                    <span>🇭🇰</span>
+
+                    <strong>→</strong>
+
+                    <span>🇹🇼</span>
+
+                </div>
+
+
+                <h2>
+
+                    Hong Kong
+                    <br>
+                    → Taiwan
+
+                </h2>
+
+
+                <p class="final-date">
+
+                    20 — 24 August 2026
+
+                </p>
+
+
+                <p class="signature">
+
+                    This trip was planned
+                    <br>
+
+                    just for you.
+
+                </p>
+
+
+                <p class="from">
+
+                    — Dennis ❤️
+
+                </p>
+
+
+                <div class="final-decoration bottom">
+
+                    ✦ &nbsp; ✧ &nbsp; ✦
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
     <script src="missions.js"></script>
-    <script type="module" src="app.js"></script>
+
+    <script
+        type="module"
+        src="app.js"
+    ></script>
+
 
 </body>
 
