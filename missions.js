@@ -66,11 +66,17 @@ const missions = [
 
             <div class="birthday-tasks">
 
-                <div>🍜 食午餐</div>
+                <div>
+                    🍜 食午餐
+                </div>
 
-                <div>🥤 飲夠水</div>
+                <div>
+                    🥤 飲夠水
+                </div>
 
-                <div>❤️ 唔可以餓住自己</div>
+                <div>
+                    ❤️ 唔可以餓住自己
+                </div>
 
             </div>
 
@@ -79,9 +85,7 @@ const missions = [
             </p>
 
             <p>
-                <strong>
-                    你可能會需要好多體力。😏
-                </strong>
+                <strong>你可能會需要好多體力。😏</strong>
             </p>
 
             <button class="complete-btn">
@@ -245,11 +249,17 @@ const missions = [
 
             <div class="birthday-tasks">
 
-                <div>🚗 車程開始 ✓</div>
+                <div>
+                    🚗 車程開始 ✓
+                </div>
 
-                <div>🔐 Secret Mission ✓</div>
+                <div>
+                    🔐 Secret Mission ✓
+                </div>
 
-                <div>❓ Destination Unknown</div>
+                <div>
+                    ❓ Destination Unknown
+                </div>
 
             </div>
 
@@ -356,9 +366,7 @@ const missions = [
         type: "birthday",
 
         content: `
-            <div class="mission-number">
-                21 AUGUST
-            </div>
+            <div class="mission-number">21 AUGUST</div>
 
             <h1>
                 Birthday Morning 🎂
@@ -374,11 +382,17 @@ const missions = [
 
             <div class="birthday-tasks">
 
-                <div>☀️ 好好享受今日</div>
+                <div>
+                    ☀️ 好好享受今日
+                </div>
 
-                <div>🍜 食啲好食嘅嘢</div>
+                <div>
+                    🍜 食啲好食嘅嘢
+                </div>
 
-                <div>📸 留低一啲回憶</div>
+                <div>
+                    📸 留低一啲回憶
+                </div>
 
             </div>
 
@@ -407,9 +421,7 @@ const missions = [
         type: "birthday",
 
         content: `
-            <div class="mission-number">
-                MISSION 08
-            </div>
+            <div class="mission-number">MISSION 08</div>
 
             <h1>
                 Birthday Dinner 🎂
@@ -511,311 +523,234 @@ const missions = [
 
 
     // ==========================================
-    // 22 AUG — PHOTO MISSION
+    // 22 AUG — FOOD HUNT
     // ==========================================
 
     {
         id: 10,
         title: "Mission 10",
-        shortTitle: "First Taipei Photo",
+        shortTitle: "Food Hunt",
         unlock: "2026-08-22T10:00:00+08:00",
-        type: "photo",
+        type: "food",
 
         content: `
-            <div class="mission-number">
-                22 AUGUST
-            </div>
+            <div class="mission-number">22 AUGUST</div>
 
             <h1>
-                First Taipei Photo 🇹🇼
+                Food Hunt 🍜
             </h1>
 
             <p>
                 Birthday 已經過咗，
-                但係台北之旅仲未完。
+                但係食嘢 Mission 仲未完。
             </p>
-
-            <p>
-                第一個影相任務：
-            </p>
-
-            <div class="classified">
-
-                📸 找一個你覺得
-                <br><br>
-
-                <strong>
-                    「呢度真係好似台灣」
-                </strong>
-
-                <br><br>
-
-                嘅地方。
-
-            </div>
-
-            <p>
-                可以係街景、招牌、夜市、
-                台北101，甚至一間好食嘅小店。
-            </p>
-
-            <p>
-                唔需要影人。
-                <br>
-                純粹記錄你第一眼嘅台北。
-            </p>
-
-
-            <div class="photo-task">
-
-                <input
-                    type="file"
-                    id="photoInput10"
-                    accept="image/*"
-                    capture="environment"
-                    hidden
-                >
-
-                <button
-                    class="photo-btn"
-                    data-input="photoInput10"
-                >
-                    📸 TAKE PHOTO
-                </button>
-
-                <div
-                    id="photoPreview10"
-                    class="photo-preview"
-                ></div>
-
-            </div>
-
-
-            <button
-                class="complete-btn photo-complete"
-                id="completePhoto10"
-                disabled
-            >
-                ✓ COMPLETE MISSION
-            </button>
-
-        `
-    },
-
-
-    // ==========================================
-    // 23 AUG — FOOD PHOTO
-    // ==========================================
-
-    {
-        id: 11,
-        title: "Mission 11",
-        shortTitle: "Food Hunter",
-        unlock: "2026-08-23T10:00:00+08:00",
-        type: "photo",
-
-        content: `
-            <div class="mission-number">
-                23 AUGUST
-            </div>
-
-            <h1>
-                Food Hunter 🍜
-            </h1>
-
-            <p>
-                今日有一個非常重要嘅任務。
-            </p>
-
-            <div class="classified">
-
-                🍜 找一樣你覺得
-                <br><br>
-
-                <strong>
-                    「一定要食」
-                </strong>
-
-                <br><br>
-
-                嘅台灣美食。
-
-            </div>
-
 
             <div class="birthday-tasks">
 
                 <div>
-                    🥟 小籠包
+                    🍜 台灣小食
                 </div>
 
                 <div>
-                    🍜 牛肉麵
+                    🧋 台灣飲品
                 </div>
 
                 <div>
-                    🧋 珍珠奶茶
+                    🍰 甜品
                 </div>
 
                 <div>
-                    🍗 雞排
-                </div>
-
-                <div>
-                    🍧 台灣甜品
+                    ⭐ 一樣你自己揀嘅食物
                 </div>
 
             </div>
 
+            <div class="photo-mission">
 
-            <p>
-                又或者係你自己發現嘅隱藏美食。
-            </p>
+                <h2>
+                    📸 FOOD PHOTO MISSION
+                </h2>
 
-            <p>
-                食之前，
-                <strong>
-                    影低今日最期待嘅一餐。
-                </strong>
-            </p>
-
-            <p>
-                如果最後覺得超好食，
-                記住幫佢留一張相。😋
-            </p>
-
-
-            <div class="photo-task">
-
-                <input
-                    type="file"
-                    id="photoInput11"
-                    accept="image/*"
-                    capture="environment"
-                    hidden
-                >
+                <p>
+                    揀一樣今日你最鍾意嘅食物，
+                    留低一張相。
+                </p>
 
                 <button
                     class="photo-btn"
-                    data-input="photoInput11"
+                    data-photo-type="food"
+                    type="button"
                 >
                     📸 TAKE FOOD PHOTO
                 </button>
 
                 <div
-                    id="photoPreview11"
                     class="photo-preview"
+                    id="photoPreview-10"
                 ></div>
 
             </div>
 
-
-            <button
-                class="complete-btn photo-complete"
-                id="completePhoto11"
-                disabled
-            >
-                ✓ COMPLETE FOOD MISSION
+            <button class="complete-btn">
+                MISSION COMPLETE 😋
             </button>
-
         `
     },
 
 
     // ==========================================
-    // 24 AUG — FINAL PHOTO
+    // 23 AUG — COUPLE MISSION
+    // ==========================================
+
+    {
+        id: 11,
+        title: "Mission 11",
+        shortTitle: "Couple Mission",
+        unlock: "2026-08-23T10:00:00+08:00",
+        type: "couple",
+
+        content: `
+            <div class="mission-number">23 AUGUST</div>
+
+            <h1>
+                Couple Mission ❤️
+            </h1>
+
+            <p>
+                今日唔係搵食任務。
+            </p>
+
+            <p>
+                今日要留低一啲
+                屬於我哋兩個嘅回憶。
+            </p>
+
+            <div class="birthday-tasks">
+
+                <div>
+                    📸 Take our favourite photo
+                </div>
+
+                <div>
+                    👫 去一個未去過嘅地方
+                </div>
+
+                <div>
+                    💌 留低一個最開心嘅回憶
+                </div>
+
+            </div>
+
+            <div class="photo-mission">
+
+                <h2>
+                    📸 COUPLE PHOTO MISSION
+                </h2>
+
+                <p>
+                    一定要影一張我哋兩個嘅合照 ❤️
+                </p>
+
+                <button
+                    class="photo-btn"
+                    data-photo-type="couple"
+                    type="button"
+                >
+                    📸 TAKE COUPLE PHOTO
+                </button>
+
+                <div
+                    class="photo-preview"
+                    id="photoPreview-11"
+                ></div>
+
+            </div>
+
+            <button class="complete-btn">
+                MISSION COMPLETE ❤️
+            </button>
+        `
+    },
+
+
+    // ==========================================
+    // 24 AUG — FINAL
     // ==========================================
 
     {
         id: 12,
         title: "FINAL",
-        shortTitle: "Birthday Memory",
+        shortTitle: "The End",
         unlock: "2026-08-24T10:00:00+08:00",
-        type: "photo",
+        type: "final",
 
         content: `
-            <div class="mission-number">
-                FINAL MISSION
-            </div>
+            <div class="final-content">
 
-            <h1>
-                Birthday Memory 🎂
-            </h1>
+                <div class="heart">
+                    ❤️
+                </div>
 
-            <p>
-                今日係台北之旅最後一日。
-            </p>
+                <h1>
+                    Happy Birthday
+                </h1>
 
-            <p>
-                去到最後一個 Mission，
-                請你同 Dennis 一齊影一張相。
-            </p>
+                <p>
+                    5 Days
+                    <br>
+                    4 Nights
+                </p>
 
-            <div class="classified">
+                <div class="final-line"></div>
 
-                ❤️ 唔需要擺 Pose
+                <h2>
+                    Hong Kong → Taiwan
+                </h2>
 
-                <br><br>
+                <p>
+                    20–24 August 2026
+                </p>
 
-                ❤️ 唔需要特登準備
+                <p class="signature">
+                    Thank you for coming<br>
+                    on this little adventure with me.
+                </p>
 
-                <br><br>
+                <p class="signature">
+                    I hope you had a really happy birthday.
+                </p>
 
-                ❤️ 就係今日最自然、
-                最開心嘅一刻
+                <div class="photo-mission">
 
-            </div>
+                    <h2>
+                        📸 FINAL PHOTO
+                    </h2>
 
-            <p>
-                📸
-                <strong>
-                    留低今次生日旅行
-                    最後一張回憶。
-                </strong>
-            </p>
+                    <p>
+                        影一張今次旅程你最鍾意嘅相，
+                        留低最後一個回憶。 ❤️
+                    </p>
 
-            <p>
-                有啲相，
-                <br>
-                過咗好多年之後再睇，
-                <br>
-                都會記得當時發生咩事。
-            </p>
+                    <button
+                        class="photo-btn"
+                        data-photo-type="final"
+                        type="button"
+                    >
+                        📸 TAKE FINAL PHOTO
+                    </button>
 
+                    <div
+                        class="photo-preview"
+                        id="photoPreview-12"
+                    ></div>
 
-            <div class="photo-task">
+                </div>
 
-                <input
-                    type="file"
-                    id="photoInput12"
-                    accept="image/*"
-                    capture="user"
-                    hidden
-                >
-
-                <button
-                    class="photo-btn"
-                    data-input="photoInput12"
-                >
-                    📸 TAKE BIRTHDAY PHOTO
-                </button>
-
-                <div
-                    id="photoPreview12"
-                    class="photo-preview"
-                ></div>
+                <p class="from">
+                    — Dennis ❤️
+                </p>
 
             </div>
-
-
-            <button
-                class="complete-btn photo-complete"
-                id="completePhoto12"
-                disabled
-            >
-                ❤️ COMPLETE FINAL MISSION
-            </button>
-
         `
     }
 

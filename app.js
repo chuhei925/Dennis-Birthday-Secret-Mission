@@ -1,63 +1,155 @@
+import { db } from "./firebase.js";
+
+import {
+    doc,
+    onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-
-        // ==========================================
+        // =====================================================
         // ELEMENTS
-        // ==========================================
+        // =====================================================
 
         const home =
             document.getElementById("home");
 
-
         const missionsScreen =
             document.getElementById("missions");
-
 
         const missionDetail =
             document.getElementById("missionDetail");
 
-
         const missionList =
             document.getElementById("missionList");
-
 
         const missionContent =
             document.getElementById("missionContent");
 
-
         const startBtn =
             document.getElementById("startBtn");
-
 
         const backBtn =
             document.getElementById("backBtn");
 
 
+        // =====================================================
+        // CHECK HTML
+        // =====================================================
 
-        // ==========================================
-        // ADMIN MANUAL UNLOCK
-        // ==========================================
+        console.log("Birthday Mission App Started");
 
-        function isAdminUnlocked(
+        console.log("startBtn:", startBtn);
+        console.log("missionsScreen:", missionsScreen);
+        console.log("missionList:", missionList);
+        console.log("missionDetail:", missionDetail);
+        console.log("missionContent:", missionContent);
+
+
+        // =====================================================
+        // FIREBASE MISSION OVERRIDES
+        // =====================================================
+
+        let missionOverrides = {};
+
+
+        const missionControlRef =
+            doc(
+                db,
+                "missionControl",
+                "status"
+            );
+
+
+        // =====================================================
+        // FIREBASE REAL-TIME LISTENER
+        // =====================================================
+
+        onSnapshot(
+            missionControlRef,
+
+            function (snapshot) {
+
+                if (snapshot.exists()) {
+
+                    missionOverrides =
+                        snapshot.data();
+
+                } else {
+
+                    missionOverrides = {};
+
+                }
+
+
+                console.log(
+                    "Mission Control Updated:",
+                    missionOverrides
+                );
+
+
+                // 更新 Mission List
+                if (
+                    missionsScreen &&
+                    missionsScreen.classList.contains("active")
+                ) {
+
+                    renderMissions();
+
+                }
+
+            },
+
+            function (error) {
+
+                console.error(
+                    "Firebase Mission Sync Error:",
+                    error
+                );
+
+            }
+        );
+
+
+        // =====================================================
+        // ADMIN OVERRIDE
+        //
+        // null  = follow schedule
+        // true  = force unlock
+        // false = force lock
+        // =====================================================
+
+        function getOverride(
             missionId
         ) {
 
-            return (
-                localStorage.getItem(
-                    "admin_unlock_" +
-                    missionId
-                ) === "true"
-            );
+            const key =
+                "mission" + missionId;
+
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    missionOverrides,
+                    key
+                )
+            ) {
+
+                return missionOverrides[key];
+
+            }
+
+
+            return null;
 
         }
 
 
-
-        // ==========================================
+        // =====================================================
         // TIME UNLOCK
-        // ==========================================
+        // =====================================================
 
         function isTimeUnlocked(
             mission
@@ -73,24 +165,30 @@ document.addEventListener(
                 );
 
 
-            return now >= unlockTime;
+            return (
+                now >= unlockTime
+            );
 
         }
 
 
-
-        // ==========================================
+        // =====================================================
         // FINAL UNLOCK CHECK
-        // ==========================================
+        // =====================================================
 
         function isUnlocked(
             mission
         ) {
 
-            if (
-                isAdminUnlocked(
+            const override =
+                getOverride(
                     mission.id
-                )
+                );
+
+
+            // Admin Force Unlock
+            if (
+                override === true
             ) {
 
                 return true;
@@ -98,6 +196,17 @@ document.addEventListener(
             }
 
 
+            // Admin Force Lock
+            if (
+                override === false
+            ) {
+
+                return false;
+
+            }
+
+
+            // Normal Schedule
             return isTimeUnlocked(
                 mission
             );
@@ -105,19 +214,27 @@ document.addEventListener(
         }
 
 
-
-        // ==========================================
+        // =====================================================
         // SHOW SCREEN
-        // ==========================================
+        // =====================================================
 
         function showScreen(
             screen
         ) {
 
+            if (!screen) {
+
+                console.error(
+                    "Screen not found"
+                );
+
+                return;
+
+            }
+
+
             document
-                .querySelectorAll(
-                    ".screen"
-                )
+                .querySelectorAll(".screen")
                 .forEach(
                     function (item) {
 
@@ -134,24 +251,31 @@ document.addEventListener(
             );
 
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo(
+                {
+                    top: 0,
+                    behavior: "smooth"
+                }
+            );
 
         }
 
 
-
-        // ==========================================
+        // =====================================================
         // START MISSION
-        // ==========================================
+        // =====================================================
 
         if (startBtn) {
 
             startBtn.addEventListener(
                 "click",
+
                 function () {
+
+                    console.log(
+                        "START MISSION clicked"
+                    );
+
 
                     showScreen(
                         missionsScreen
@@ -163,21 +287,56 @@ document.addEventListener(
                 }
             );
 
+        } else {
+
+            console.error(
+                "❌ START BUTTON NOT FOUND"
+            );
+
         }
 
 
-
-        // ==========================================
-        // RENDER MISSION LIST
-        // ==========================================
+        // =====================================================
+        // RENDER MISSIONS
+        // =====================================================
 
         function renderMissions() {
 
             if (!missionList) {
 
                 console.error(
-                    "missionList not found"
+                    "❌ #missionList not found"
                 );
+
+                return;
+
+            }
+
+
+            if (
+                typeof missions ===
+                "undefined"
+            ) {
+
+                console.error(
+                    "❌ missions.js not loaded"
+                );
+
+                missionList.innerHTML = `
+
+                    <div class="admin-info">
+
+                        ⚠️ Mission data not found.
+
+                        <br><br>
+
+                        Please check:
+                        <br>
+                        missions.js
+
+                    </div>
+
+                `;
 
                 return;
 
@@ -190,7 +349,6 @@ document.addEventListener(
 
             missions.forEach(
                 function (mission) {
-
 
                     const unlocked =
                         isUnlocked(
@@ -221,10 +379,7 @@ document.addEventListener(
 
                                 ${String(
                                     mission.id
-                                ).padStart(
-                                    2,
-                                    "0"
-                                )}
+                                ).padStart(2, "0")}
 
                             </div>
 
@@ -253,8 +408,8 @@ document.addEventListener(
 
                             ${
                                 unlocked
-                                ? "🔓"
-                                : "🔒"
+                                    ? "🔓"
+                                    : "🔒"
                             }
 
                         </div>
@@ -264,10 +419,13 @@ document.addEventListener(
 
                             ${
                                 unlocked
-                                ? "Mission available"
-                                : formatUnlockTime(
-                                    mission.unlock
-                                )
+
+                                    ? "Mission available"
+
+                                    : formatUnlockTime(
+                                        mission.unlock
+                                    )
+
                             }
 
                         </div>
@@ -275,15 +433,19 @@ document.addEventListener(
                     `;
 
 
-
-                    // ==================================
-                    // CLICK UNLOCKED MISSION
-                    // ==================================
+                    // ==========================================
+                    // ONLY UNLOCKED MISSION CAN BE OPENED
+                    // ==========================================
 
                     if (unlocked) {
 
+                        card.style.cursor =
+                            "pointer";
+
+
                         card.addEventListener(
                             "click",
+
                             function () {
 
                                 openMission(
@@ -306,20 +468,37 @@ document.addEventListener(
         }
 
 
-
-        // ==========================================
+        // =====================================================
         // OPEN MISSION
-        // ==========================================
+        // =====================================================
 
         function openMission(
             mission
         ) {
+
+            if (!mission) {
+
+                return;
+
+            }
+
 
             if (
                 !isUnlocked(
                     mission
                 )
             ) {
+
+                return;
+
+            }
+
+
+            if (!missionContent) {
+
+                console.error(
+                    "❌ #missionContent not found"
+                );
 
                 return;
 
@@ -335,146 +514,74 @@ document.addEventListener(
             );
 
 
-            // PHOTO MISSION SETUP
+            setupMissionButtons(
+                mission
+            );
 
-            setupPhotoMission();
+
+            setupPhotoButtons(
+                mission
+            );
+
+
+            restoreSavedPhoto(
+                mission.id
+            );
 
         }
 
 
+        // =====================================================
+        // MISSION BUTTONS
+        //
+        // Every button inside Mission:
+        //
+        // → Complete
+        // → Back
+        //
+        // will return to Your Missions
+        // =====================================================
 
-        // ==========================================
-        // PHOTO MISSION SETUP
-        // ==========================================
+        function setupMissionButtons(
+            mission
+        ) {
 
-        function setupPhotoMission() {
-
-            const photoButtons =
+            const buttons =
                 missionContent.querySelectorAll(
-                    ".photo-btn"
+                    ".complete-btn"
                 );
 
 
-            photoButtons.forEach(
+            buttons.forEach(
                 function (button) {
 
                     button.addEventListener(
                         "click",
+
                         function () {
 
-                            const inputId =
-                                button.dataset.input;
+                            button.innerHTML =
+                                "✓ MISSION COMPLETE";
 
 
-                            const input =
-                                document.getElementById(
-                                    inputId
-                                );
+                            button.classList.add(
+                                "completed"
+                            );
 
 
-                            if (input) {
+                            setTimeout(
+                                function () {
 
-                                input.click();
-
-                            }
-
-                        }
-                    );
-
-                }
-            );
+                                    showScreen(
+                                        missionsScreen
+                                    );
 
 
+                                    renderMissions();
 
-            // PHOTO INPUT
+                                },
 
-            const photoInputs =
-                missionContent.querySelectorAll(
-                    'input[type="file"]'
-                );
-
-
-            photoInputs.forEach(
-                function (input) {
-
-                    input.addEventListener(
-                        "change",
-                        function () {
-
-                            const file =
-                                input.files[0];
-
-
-                            if (!file) {
-
-                                return;
-
-                            }
-
-
-                            const reader =
-                                new FileReader();
-
-
-                            reader.onload =
-                                function (event) {
-
-
-                                    const missionId =
-                                        input.id.replace(
-                                            "photoInput",
-                                            ""
-                                        );
-
-
-                                    const preview =
-                                        document.getElementById(
-                                            "photoPreview" +
-                                            missionId
-                                        );
-
-
-                                    const completeButton =
-                                        document.getElementById(
-                                            "completePhoto" +
-                                            missionId
-                                        );
-
-
-                                    if (preview) {
-
-                                        preview.innerHTML = `
-
-                                            <img
-                                                src="${event.target.result}"
-                                                alt="Mission Photo"
-                                            >
-
-                                            <div
-                                                class="photo-success"
-                                            >
-                                                📸 PHOTO READY
-                                            </div>
-
-                                        `;
-
-                                    }
-
-
-                                    if (
-                                        completeButton
-                                    ) {
-
-                                        completeButton.disabled =
-                                            false;
-
-                                    }
-
-                                };
-
-
-                            reader.readAsDataURL(
-                                file
+                                500
                             );
 
                         }
@@ -486,101 +593,15 @@ document.addEventListener(
         }
 
 
-
-        // ==========================================
-        // MISSION CONTENT BUTTONS
-        // ==========================================
-
-        missionContent.addEventListener(
-            "click",
-            function (event) {
-
-
-                const button =
-                    event.target.closest(
-                        "button"
-                    );
-
-
-                if (!button) {
-
-                    return;
-
-                }
-
-
-
-                // PHOTO BUTTON
-                //
-                // 已經由 setupPhotoMission()
-                // 處理，所以唔返回 Your Missions
-
-                if (
-                    button.classList.contains(
-                        "photo-btn"
-                    )
-                ) {
-
-                    return;
-
-                }
-
-
-
-                // COMPLETE BUTTON
-                //
-                // 返回 Your Missions
-
-                if (
-                    button.classList.contains(
-                        "complete-btn"
-                    )
-                ) {
-
-
-                    // 如果係 Photo Mission
-                    // 但未影相，不允許完成
-
-                    if (
-                        button.classList.contains(
-                            "photo-complete"
-                        ) &&
-                        button.disabled
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    showScreen(
-                        missionsScreen
-                    );
-
-
-                    renderMissions();
-
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth"
-                    });
-
-                }
-
-            }
-        );
-
-
-
-        // ==========================================
+        // =====================================================
         // BACK BUTTON
-        // ==========================================
+        // =====================================================
 
         if (backBtn) {
 
             backBtn.addEventListener(
                 "click",
+
                 function () {
 
                     showScreen(
@@ -596,10 +617,505 @@ document.addEventListener(
         }
 
 
+        // =====================================================
+        // MISSION CONTENT
+        //
+        // Important:
+        // ONLY complete-btn returns to missions.
+        //
+        // Photo buttons will NOT accidentally
+        // close the Mission.
+        // =====================================================
 
-        // ==========================================
+        if (missionContent) {
+
+            missionContent.addEventListener(
+                "click",
+
+                function (event) {
+
+                    const button =
+                        event.target.closest(
+                            ".complete-btn"
+                        );
+
+
+                    if (!button) {
+
+                        return;
+
+                    }
+
+
+                    showScreen(
+                        missionsScreen
+                    );
+
+
+                    renderMissions();
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // PHOTO MISSION
+        // =====================================================
+
+        function setupPhotoButtons(
+            mission
+        ) {
+
+            const buttons =
+                missionContent.querySelectorAll(
+                    ".photo-btn"
+                );
+
+
+            buttons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+
+                        function (event) {
+
+                            event.stopPropagation();
+
+
+                            const photoType =
+                                button.dataset.photoType ||
+                                "photo";
+
+
+                            openCamera(
+                                mission.id,
+                                photoType
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // OPEN CAMERA
+        // =====================================================
+
+        function openCamera(
+            missionId,
+            photoType
+        ) {
+
+            const input =
+                document.createElement(
+                    "input"
+                );
+
+
+            input.type =
+                "file";
+
+
+            input.accept =
+                "image/*";
+
+
+            // Couple = Front Camera
+            if (
+                photoType ===
+                "couple"
+            ) {
+
+                input.setAttribute(
+                    "capture",
+                    "user"
+                );
+
+            }
+
+            // Food / Final = Rear Camera
+            else {
+
+                input.setAttribute(
+                    "capture",
+                    "environment"
+                );
+
+            }
+
+
+            input.style.display =
+                "none";
+
+
+            document.body.appendChild(
+                input
+            );
+
+
+            input.addEventListener(
+                "change",
+
+                function () {
+
+                    const file =
+                        input.files &&
+                        input.files[0];
+
+
+                    if (!file) {
+
+                        input.remove();
+
+                        return;
+
+                    }
+
+
+                    showPhotoPreview(
+                        missionId,
+                        photoType,
+                        file
+                    );
+
+
+                    savePhotoLocally(
+                        missionId,
+                        photoType,
+                        file
+                    );
+
+
+                    input.remove();
+
+                }
+            );
+
+
+            input.click();
+
+        }
+
+
+        // =====================================================
+        // SHOW PHOTO
+        // =====================================================
+
+        function showPhotoPreview(
+            missionId,
+            photoType,
+            file
+        ) {
+
+            const preview =
+                document.getElementById(
+                    "photoPreview-" +
+                    missionId
+                );
+
+
+            if (!preview) {
+
+                console.error(
+                    "Photo preview not found for Mission " +
+                    missionId
+                );
+
+                return;
+
+            }
+
+
+            const imageURL =
+                URL.createObjectURL(
+                    file
+                );
+
+
+            let message =
+                "📸 PHOTO CAPTURED!";
+
+
+            if (
+                photoType ===
+                "food"
+            ) {
+
+                message =
+                    "😋 FOOD PHOTO CAPTURED!";
+
+            }
+
+
+            if (
+                photoType ===
+                "couple"
+            ) {
+
+                message =
+                    "❤️ COUPLE PHOTO CAPTURED!";
+
+            }
+
+
+            if (
+                photoType ===
+                "final"
+            ) {
+
+                message =
+                    "🎂 FINAL PHOTO CAPTURED!";
+
+            }
+
+
+            preview.innerHTML = `
+
+                <div class="photo-result">
+
+                    <img
+                        src="${imageURL}"
+                        alt="Mission Photo"
+                        class="mission-photo"
+                    >
+
+
+                    <p class="photo-success">
+
+                        ${message}
+
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="photo-retake-btn"
+                    >
+
+                        📸 RETAKE PHOTO
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            const retakeButton =
+                preview.querySelector(
+                    ".photo-retake-btn"
+                );
+
+
+            if (retakeButton) {
+
+                retakeButton.addEventListener(
+                    "click",
+
+                    function (event) {
+
+                        event.stopPropagation();
+
+
+                        openCamera(
+                            missionId,
+                            photoType
+                        );
+
+                    }
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
+        // SAVE PHOTO LOCALLY
+        // =====================================================
+
+        function savePhotoLocally(
+            missionId,
+            photoType,
+            file
+        ) {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function () {
+
+                    try {
+
+                        localStorage.setItem(
+
+                            "birthdayPhoto_" +
+                            missionId,
+
+                            JSON.stringify({
+
+                                type:
+                                    photoType,
+
+                                image:
+                                    reader.result,
+
+                                savedAt:
+                                    new Date().toISOString()
+
+                            })
+
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.warn(
+                            "Photo could not be saved:",
+                            error
+                        );
+
+                    }
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+
+
+        // =====================================================
+        // RESTORE PHOTO
+        // =====================================================
+
+        function restoreSavedPhoto(
+            missionId
+        ) {
+
+            const saved =
+                localStorage.getItem(
+                    "birthdayPhoto_" +
+                    missionId
+                );
+
+
+            if (!saved) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const photo =
+                    JSON.parse(
+                        saved
+                    );
+
+
+                const preview =
+                    document.getElementById(
+                        "photoPreview-" +
+                        missionId
+                    );
+
+
+                if (!preview) {
+
+                    return;
+
+                }
+
+
+                preview.innerHTML = `
+
+                    <div class="photo-result">
+
+                        <img
+                            src="${photo.image}"
+                            alt="Saved Mission Photo"
+                            class="mission-photo"
+                        >
+
+
+                        <p class="photo-success">
+
+                            📸 PHOTO SAVED
+
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="photo-retake-btn"
+                        >
+
+                            📸 RETAKE PHOTO
+
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                const retakeButton =
+                    preview.querySelector(
+                        ".photo-retake-btn"
+                    );
+
+
+                if (retakeButton) {
+
+                    retakeButton.addEventListener(
+                        "click",
+
+                        function (event) {
+
+                            event.stopPropagation();
+
+
+                            openCamera(
+                                missionId,
+                                photo.type
+                            );
+
+                        }
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Could not restore photo:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        // =====================================================
         // FORMAT UNLOCK TIME
-        // ==========================================
+        // =====================================================
 
         function formatUnlockTime(
             unlock
@@ -611,8 +1127,7 @@ document.addEventListener(
                 );
 
 
-            // 2099 = manual unlock
-
+            // 2099 = Manual Mission
             if (
                 date.getFullYear() >=
                 2099
@@ -657,26 +1172,33 @@ document.addEventListener(
         }
 
 
-
-        // ==========================================
-        // INITIAL STATE
-        // ==========================================
+        // =====================================================
+        // INITIAL SCREEN
+        // =====================================================
 
         showScreen(
             home
         );
 
 
+        // =====================================================
+        // INITIAL MISSION LIST
+        // =====================================================
 
-        // ==========================================
+        renderMissions();
+
+
+        // =====================================================
         // AUTO REFRESH
-        // ==========================================
+        //
+        // Every second check Schedule
+        // =====================================================
 
         setInterval(
             function () {
 
-
                 if (
+                    missionsScreen &&
                     missionsScreen.classList.contains(
                         "active"
                     )
@@ -687,9 +1209,9 @@ document.addEventListener(
                 }
 
             },
+
             1000
         );
-
 
     }
 );
