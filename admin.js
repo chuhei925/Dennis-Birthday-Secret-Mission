@@ -16,9 +16,9 @@ import {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // =========================================================
-    // BASIC ELEMENTS
-    // =========================================================
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
 
     const loginButton =
         document.getElementById("loginBtn");
@@ -42,19 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("adminPanel");
 
 
-    // =========================================================
-    // DENNIS ADMIN EMAIL
-    // =========================================================
+    // =====================================================
+    // ADMIN EMAIL
+    // =====================================================
 
     const ADMIN_EMAIL =
         "chuhei925@gmail.com";
 
 
-    // =========================================================
-    // FIREBASE MISSION STATUS
-    // =========================================================
+    // =====================================================
+    // MISSION OVERRIDES
+    //
+    // null / missing = FOLLOW SCHEDULE
+    // true           = FORCE UNLOCK
+    // false          = FORCE LOCK
+    // =====================================================
 
     let missionOverrides = {};
+
 
     const missionControlRef =
         doc(
@@ -64,25 +69,24 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    // =========================================================
-    // LISTEN TO FIREBASE
-    // =========================================================
+    // =====================================================
+    // FIREBASE REAL-TIME SYNC
+    // =====================================================
 
     onSnapshot(
         missionControlRef,
 
         function (snapshot) {
 
-            if (snapshot.exists()) {
+            missionOverrides =
+                snapshot.exists()
+                    ? snapshot.data()
+                    : {};
 
-                missionOverrides =
-                    snapshot.data();
-
-            } else {
-
-                missionOverrides = {};
-
-            }
+            console.log(
+                "Mission Control:",
+                missionOverrides
+            );
 
 
             if (auth.currentUser) {
@@ -104,9 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    // =========================================================
-    // CHECK LOGIN STATUS
-    // =========================================================
+    // =====================================================
+    // AUTH STATE
+    // =====================================================
 
     onAuthStateChanged(
         auth,
@@ -137,9 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    // =========================================================
+    // =====================================================
     // LOGIN
-    // =========================================================
+    // =====================================================
 
     loginButton.addEventListener(
         "click",
@@ -160,7 +164,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            loginButton.disabled = true;
+            if (
+                ADMIN_EMAIL ===
+                "YOUR_ADMIN_EMAIL_HERE"
+            ) {
+
+                loginError.innerText =
+                    "請先設定 Admin Email";
+
+                return;
+
+            }
+
+
+            loginButton.disabled =
+                true;
 
             loginButton.innerText =
                 "LOGIN...";
@@ -184,7 +202,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    error
+                );
 
                 loginError.innerText =
                     "登入失敗：請檢查 Email / Password";
@@ -203,15 +223,13 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    // =========================================================
-    // GET MISSION OVERRIDE
-    //
-    // null = Follow Schedule
-    // true = Force Unlock
-    // false = Force Lock
-    // =========================================================
+    // =====================================================
+    // GET OVERRIDE
+    // =====================================================
 
-    function getOverride(missionId) {
+    function getOverride(
+        missionId
+    ) {
 
         const key =
             "mission" + missionId;
@@ -234,9 +252,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // =========================================================
-    // LOAD ADMIN MISSION LIST
-    // =========================================================
+    // =====================================================
+    // LOAD ADMIN
+    // =====================================================
 
     function loadAdmin() {
 
@@ -246,7 +264,11 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        if (!list) return;
+        if (!list) {
+
+            return;
+
+        }
 
 
         list.innerHTML =
@@ -259,9 +281,13 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
 
             list.innerHTML = `
+
                 <div class="admin-info">
+
                     ⚠️ 找不到 missions.js
+
                 </div>
+
             `;
 
             return;
@@ -289,20 +315,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 // =================================================
-                // FOLLOW SCHEDULE
+                // STATUS
                 // =================================================
 
                 let statusText =
-                    "FOLLOW SCHEDULE";
+                    "🕐 FOLLOW SCHEDULE";
 
                 let buttonText =
                     "🔓 Unlock";
 
 
-                // =================================================
-                // MANUALLY UNLOCKED
-                // =================================================
-
+                // Force Unlock
                 if (
                     override === true
                 ) {
@@ -316,11 +339,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                // =================================================
-                // MANUALLY LOCKED
-                // =================================================
-
-                if (
+                // Force Lock
+                else if (
                     override === false
                 ) {
 
@@ -328,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         "🔒 MANUALLY LOCKED";
 
                     buttonText =
-                        "🔓 Unlock";
+                        "🔄 Schedule";
 
                 }
 
@@ -338,26 +358,37 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="admin-mission-info">
 
                         <div class="admin-mission-number">
+
                             ${String(
                                 mission.id
-                            ).padStart(2, "0")}
+                            ).padStart(
+                                2,
+                                "0"
+                            )}
+
                         </div>
 
 
                         <div>
 
                             <div class="admin-mission-title">
+
                                 ${mission.title}
+
                             </div>
 
 
                             <div class="admin-mission-subtitle">
+
                                 ${mission.shortTitle}
+
                             </div>
 
 
                             <div class="admin-unlocked">
+
                                 ${statusText}
+
                             </div>
 
                         </div>
@@ -371,7 +402,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             class="unlock-btn"
                             data-id="${mission.id}"
                         >
+
                             ${buttonText}
+
                         </button>
 
                     </div>
@@ -387,9 +420,9 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        // =========================================================
-        // UNLOCK / LOCK BUTTONS
-        // =========================================================
+        // =====================================================
+        // BUTTON EVENTS
+        // =====================================================
 
         document
             .querySelectorAll(
@@ -409,51 +442,121 @@ document.addEventListener("DOMContentLoaded", function () {
                                 );
 
 
+                            const key =
+                                "mission" +
+                                id;
+
+
                             const current =
-                                getOverride(id);
-
-
-                            /*
-                                Behaviour:
-
-                                FOLLOW SCHEDULE
-                                ↓
-                                Unlock
-
-                                MANUALLY UNLOCKED
-                                ↓
-                                Lock
-
-                                MANUALLY LOCKED
-                                ↓
-                                Unlock
-                            */
-
-
-                            const newValue =
-                                current === true
-                                    ? false
-                                    : true;
+                                getOverride(
+                                    id
+                                );
 
 
                             try {
 
-                                await setDoc(
-                                    missionControlRef,
+                                // =========================================
+                                // CURRENTLY FORCE UNLOCKED
+                                //
+                                // Unlock → Lock
+                                //
+                                // IMPORTANT:
+                                // DELETE override
+                                // so Mission goes back to Schedule
+                                // =========================================
 
-                                    {
-                                        [
-                                            "mission" +
-                                            id
-                                        ]:
-                                            newValue
-                                    },
+                                if (
+                                    current === true
+                                ) {
 
-                                    {
-                                        merge:
-                                            true
-                                    }
-                                );
+                                    await setDoc(
+                                        missionControlRef,
+
+                                        {
+                                            [key]:
+                                                deleteField()
+                                        },
+
+                                        {
+                                            merge:
+                                                true
+                                        }
+                                    );
+
+
+                                    console.log(
+                                        "Mission " +
+                                        id +
+                                        " → FOLLOW SCHEDULE"
+                                    );
+
+                                }
+
+
+                                // =========================================
+                                // CURRENTLY FORCE LOCKED
+                                //
+                                // Lock → Schedule
+                                // =========================================
+
+                                else if (
+                                    current === false
+                                ) {
+
+                                    await setDoc(
+                                        missionControlRef,
+
+                                        {
+                                            [key]:
+                                                deleteField()
+                                        },
+
+                                        {
+                                            merge:
+                                                true
+                                        }
+                                    );
+
+
+                                    console.log(
+                                        "Mission " +
+                                        id +
+                                        " → FOLLOW SCHEDULE"
+                                    );
+
+                                }
+
+
+                                // =========================================
+                                // FOLLOW SCHEDULE
+                                //
+                                // Schedule → Force Unlock
+                                // =========================================
+
+                                else {
+
+                                    await setDoc(
+                                        missionControlRef,
+
+                                        {
+                                            [key]:
+                                                true
+                                        },
+
+                                        {
+                                            merge:
+                                                true
+                                        }
+                                    );
+
+
+                                    console.log(
+                                        "Mission " +
+                                        id +
+                                        " → FORCE UNLOCK"
+                                    );
+
+                                }
 
 
                             } catch (error) {
@@ -465,7 +568,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                                 alert(
-                                    "❌ 更新失敗，請檢查 Firebase。"
+                                    "更新失敗，請檢查 Firebase。"
                                 );
 
                             }
@@ -479,140 +582,135 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // =========================================================
+    // =====================================================
     // RESET ALL LOCKS
     //
-    // IMPORTANT:
-    // DO NOT WRITE FALSE.
-    //
-    // DELETE ALL OVERRIDES.
-    //
-    // After reset:
-    //
-    // Firebase Override
-    //        ↓
-    //      NONE
-    //        ↓
-    // Index follows missions.js Schedule
-    // =========================================================
+    // Keep your current Reset All Locks behaviour.
+    // This version clears ALL overrides and returns
+    // EVERY Mission to its original Schedule.
+    // =====================================================
 
-    resetLockButton.addEventListener(
-        "click",
+    if (resetLockButton) {
 
-        async function () {
+        resetLockButton.addEventListener(
+            "click",
 
-            const confirmed =
-                confirm(
-                    "確定要 Reset 所有 Mission？\n\n" +
-                    "Reset 後會清除所有 Admin 手動 Lock / Unlock。\n\n" +
-                    "之後所有 Mission 會重新按照原本 Schedule 自動開啟。"
-                );
+            async function () {
+
+                const confirmed =
+                    confirm(
+                        "確定要 Reset ALL Missions？\n\nReset 後所有 Mission 會重新按照原本指定時間開啟。"
+                    );
 
 
-            if (!confirmed) {
+                if (!confirmed) {
 
-                return;
+                    return;
 
-            }
-
-
-            try {
-
-                // =================================================
-                // CREATE DELETE COMMANDS
-                // =================================================
-
-                const resetData =
-                    {};
+                }
 
 
-                missions.forEach(
-                    function (mission) {
+                if (
+                    typeof missions ===
+                    "undefined"
+                ) {
 
-                        resetData[
-                            "mission" +
-                            mission.id
-                        ] =
-                            deleteField();
+                    alert(
+                        "找不到 missions.js"
+                    );
 
-                    }
-                );
+                    return;
 
-
-                // =================================================
-                // DELETE ALL MANUAL OVERRIDES
-                // =================================================
-
-                await setDoc(
-                    missionControlRef,
-
-                    resetData,
-
-                    {
-                        merge:
-                            true
-                    }
-                );
+                }
 
 
-                // =================================================
-                // SUCCESS
-                // =================================================
+                try {
 
-                alert(
-                    "✅ Reset All Locks 完成！\n\n" +
-                    "所有 Admin 手動 Lock / Unlock 已清除。\n\n" +
-                    "Mission 現在會重新按照原本 Schedule 自動開啟。"
-                );
+                    const update =
+                        {};
 
 
-            } catch (error) {
+                    missions.forEach(
+                        function (mission) {
 
-                console.error(
-                    "Reset All Locks error:",
-                    error
-                );
+                            update[
+                                "mission" +
+                                mission.id
+                            ] =
+                                deleteField();
+
+                        }
+                    );
 
 
-                alert(
-                    "❌ Reset 失敗。\n\n" +
-                    "請檢查 Firebase Console / Browser Console。"
-                );
+                    await setDoc(
+                        missionControlRef,
+
+                        update,
+
+                        {
+                            merge:
+                                true
+                        }
+                    );
+
+
+                    alert(
+                        "🔄 Reset 完成！\n\n所有 Mission 已恢復按照 Schedule 自動開啟。"
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Reset error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Reset 失敗，請檢查 Firebase 設定。"
+                    );
+
+                }
 
             }
+        );
 
-        }
-    );
+    }
 
 
-    // =========================================================
+    // =====================================================
     // LOGOUT
-    // =========================================================
+    // =====================================================
 
-    logoutButton.addEventListener(
-        "click",
+    if (logoutButton) {
 
-        async function () {
+        logoutButton.addEventListener(
+            "click",
 
-            try {
+            async function () {
 
-                await signOut(
-                    auth
-                );
+                try {
 
-            } catch (error) {
+                    await signOut(
+                        auth
+                    );
 
-                console.error(
-                    "Logout error:",
-                    error
-                );
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                }
+
+
+                location.reload();
 
             }
+        );
 
-
-            location.reload();
-
-        }
-    );
+    }
 
 });
