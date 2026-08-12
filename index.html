@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111111">
+
+    <title>Birthday Secret Mission</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- HOME -->
+        <section id="home" class="screen active">
+
+            <div class="hero">
+
+                <div class="lock">🔐</div>
+
+                <h1>Birthday<br>Secret Mission</h1>
+
+                <p class="subtitle">
+                    A little adventure is waiting for you.
+                </p>
+
+                <button id="startBtn" class="main-btn">
+                    START MISSION
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MISSIONS -->
+        <section id="missions" class="screen">
+
+            <div class="header">
+
+                <span class="small-title">
+                    BIRTHDAY 2026
+                </span>
+
+                <h2>Your Missions</h2>
+
+            </div>
+
+            <div id="missionList"></div>
+
+        </section>
+
+
+        <!-- MISSION DETAIL -->
+        <section id="missionDetail" class="screen">
+
+            <button id="backBtn" class="back-btn">
+                ← Back
+            </button>
+
+            <div id="missionContent"></div>
+
+        </section>
+
+
+        <!-- FINAL -->
+        <section id="final" class="screen">
+
+            <div class="final-content">
+
+                <div class="heart">❤️</div>
+
+                <h1>Happy Birthday</h1>
+
+                <p>
+                    I hope you enjoyed<br>
+                    this little adventure.
+                </p>
+
+                <div class="final-line"></div>
+
+                <h2>
+                    From Hong Kong<br>
+                    → Taiwan
+                </h2>
+
+                <p class="signature">
+                    This trip was planned<br>
+                    just for you.
+                </p>
+
+                <p class="from">
+                    — Dennis ❤️
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="missions.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

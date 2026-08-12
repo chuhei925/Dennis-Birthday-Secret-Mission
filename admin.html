@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#17659a"
+    >
+
+    <title>Dennis Admin Mode</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-page">
+
+
+    <!-- ======================================
+         LOGIN
+    ======================================= -->
+
+    <div
+        id="adminLogin"
+        class="admin-card"
+    >
+
+        <div class="admin-icon">
+            🔐
+        </div>
+
+        <h1>
+            Dennis Admin Mode
+        </h1>
+
+        <p>
+            Birthday Secret Mission
+        </p>
+
+
+        <input
+            id="adminPin"
+            type="password"
+            placeholder="Enter PIN"
+            maxlength="8"
+        >
+
+
+        <button
+            id="loginBtn"
+            class="admin-btn"
+        >
+            ENTER
+        </button>
+
+
+        <p
+            id="loginError"
+            class="login-error"
+        ></p>
+
+    </div>
+
+
+
+    <!-- ======================================
+         ADMIN PANEL
+    ======================================= -->
+
+    <div
+        id="adminPanel"
+        class="admin-panel"
+        style="display:none;"
+    >
+
+
+        <!-- HEADER -->
+
+        <div class="admin-header">
+
+            <div>
+
+                <div class="admin-label">
+                    BIRTHDAY 2026
+                </div>
+
+                <h1>
+                    Dennis Admin
+                </h1>
+
+            </div>
+
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+
+        <!-- STATUS -->
+
+        <div class="admin-status">
+
+            <div>
+
+                <span>
+                    System
+                </span>
+
+                <strong>
+                    ONLINE 🟢
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Admin
+                </span>
+
+                <strong>
+                    DENNIS
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================
+             MISSION CONTROL
+        =================================== -->
+
+        <div class="admin-section">
+
+            <div class="admin-date">
+                20 AUG — SECRET MISSION
+            </div>
+
+
+            <div
+                id="adminMissionList"
+                class="admin-missions"
+            ></div>
+
+        </div>
+
+
+
+        <!-- ==================================
+             BIRTHDAY
+        =================================== -->
+
+        <div class="admin-section">
+
+            <div class="admin-date">
+                21 AUG — BIRTHDAY
+            </div>
+
+
+            <div class="admin-info">
+
+                🎂 Birthday Dinner
+
+                <br>
+
+                <strong>
+                    17:45 — 旭集
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================
+             RESET
+        =================================== -->
+
+        <div class="admin-section danger-zone">
+
+            <div class="admin-date">
+                TESTING CONTROL
+            </div>
+
+
+            <button
+                id="resetLockBtn"
+                class="reset-lock-btn"
+            >
+                🔒 RESET ALL LOCKS
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script src="missions.js"></script>
+
+<script src="admin.js"></script>
+
+
+</body>
+
+</html>

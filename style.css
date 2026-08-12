@@ -1,0 +1,1341 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    min-height: 100vh;
+
+    color: #17324d;
+
+    background:
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,.9) 0 4px, transparent 5px),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.7) 0 5px, transparent 6px),
+        linear-gradient(
+            180deg,
+            #9edcff 0%,
+            #d8f2ff 45%,
+            #f5fbff 100%
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   DECORATION
+========================= */
+
+body::before {
+    content: "🎈     ✨       🎂       ✨     🎈";
+
+    position: fixed;
+
+    top: 12px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    letter-spacing: 8px;
+
+    opacity: .8;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+body::after {
+    content: "★    ✦      ★       ✦      ★";
+
+    position: fixed;
+
+    bottom: 12px;
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    letter-spacing: 12px;
+
+    opacity: .7;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================
+   SCREEN
+========================= */
+
+.screen {
+    display: none;
+
+    min-height: 100vh;
+
+    padding: 28px 20px;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+.screen.active {
+    display: block;
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+.hero {
+    min-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+}
+
+
+.lock {
+    font-size: 55px;
+
+    margin-bottom: 20px;
+
+    animation: float 3s ease-in-out infinite;
+}
+
+
+.hero h1 {
+    font-size: 42px;
+
+    line-height: 1.05;
+
+    letter-spacing: -1px;
+
+    color: #17558a;
+
+    text-shadow:
+        0 3px 0 #ffffff;
+}
+
+
+.subtitle {
+    margin-top: 18px;
+
+    color: #47718f;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+.main-btn {
+    margin-top: 35px;
+
+    padding: 17px 38px;
+
+    border: 0;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #e8f7ff
+        );
+
+    color: #17639a;
+
+    font-weight: 800;
+
+    font-size: 15px;
+
+    box-shadow:
+        0 8px 20px rgba(32,120,180,.18);
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.main-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(32,120,180,.25);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    padding-top: 30px;
+
+    margin-bottom: 25px;
+}
+
+
+.small-title {
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    color: #5c89a7;
+}
+
+
+.header h2 {
+    font-size: 32px;
+
+    margin-top: 8px;
+
+    color: #174f7b;
+}
+
+
+/* =========================
+   MISSION CARD
+========================= */
+
+.mission-card {
+
+    position: relative;
+
+    padding: 20px;
+
+    margin-bottom: 14px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    border: 2px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 8px 25px rgba(50,130,180,.12);
+
+    backdrop-filter: blur(8px);
+
+    transition: .2s;
+}
+
+
+.mission-card.unlocked {
+    cursor: pointer;
+}
+
+
+.mission-card.unlocked:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 28px rgba(50,130,180,.2);
+}
+
+
+.mission-card.locked {
+    opacity: .65;
+}
+
+
+.mission-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+.mission-id {
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #dff3ff;
+
+    color: #2674a7;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.mission-title {
+    font-weight: 800;
+
+    color: #1d557e;
+}
+
+
+.mission-subtitle {
+    font-size: 13px;
+
+    color: #7595a9;
+
+    margin-top: 4px;
+}
+
+
+.status {
+    position: absolute;
+
+    right: 20px;
+
+    top: 22px;
+}
+
+
+.unlock-time {
+    margin-top: 15px;
+
+    font-size: 11px;
+
+    color: #7893a5;
+}
+
+
+/* =========================
+   DETAIL
+========================= */
+
+.back-btn {
+    background: rgba(255,255,255,.7);
+
+    border: 0;
+
+    color: #397093;
+
+    font-size: 14px;
+
+    padding: 9px 14px;
+
+    border-radius: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+#missionContent {
+    max-width: 600px;
+
+    margin: auto;
+
+    background: rgba(255,255,255,.75);
+
+    padding: 28px 22px;
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 10px 35px rgba(45,120,170,.12);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.mission-number {
+    font-size: 13px;
+
+    color: #6c9bbb;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+}
+
+
+#missionContent h1 {
+    font-size: 36px;
+
+    line-height: 1.15;
+
+    margin-bottom: 22px;
+
+    color: #185987;
+}
+
+
+#missionContent p {
+    color: #52728a;
+
+    line-height: 1.8;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.complete-btn {
+    width: 100%;
+
+    padding: 17px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4bb8ef,
+            #2879c4
+        );
+
+    color: white;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 18px rgba(40,120,190,.2);
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   CHOICES
+========================= */
+
+.choices {
+    display: grid;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+
+.choice {
+    padding: 18px;
+
+    border-radius: 16px;
+
+    background: rgba(235,248,255,.9);
+
+    border: 2px solid transparent;
+
+    color: #275b7d;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.choice:hover {
+    transform: translateY(-2px);
+}
+
+
+.choice.selected {
+    border-color: #319bd6;
+
+    background: #d9f2ff;
+}
+
+
+/* =========================
+   CHECKLIST
+========================= */
+
+.checklist {
+    background: #eaf7ff;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    margin: 25px 0;
+}
+
+
+.checklist div {
+    padding: 10px 0;
+
+    color: #38677f;
+}
+
+
+.classified {
+    padding: 20px;
+
+    text-align: center;
+
+    border: 2px dashed #83bddc;
+
+    border-radius: 15px;
+
+    color: #4c87a6;
+
+    background: rgba(255,255,255,.5);
+}
+
+
+/* =========================
+   TAIWAN REVEAL
+========================= */
+
+.reveal {
+
+    min-height: 75vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.flag {
+    font-size: 75px;
+
+    margin-bottom: 20px;
+
+    animation: float 3s ease-in-out infinite;
+}
+
+
+.welcome {
+    letter-spacing: 5px;
+
+    font-size: 13px;
+
+    color: #6d98b2 !important;
+}
+
+
+.reveal h1 {
+    font-size: 58px !important;
+
+    letter-spacing: 5px;
+
+    color: #1675b3 !important;
+}
+
+
+.trip-info {
+    margin-top: 30px;
+
+    color: #557c93;
+
+    line-height: 2;
+}
+
+
+/* =========================
+   BIRTHDAY
+========================= */
+
+.birthday-tasks {
+    background: #fff8fc;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    border: 2px solid #ffe5f2;
+}
+
+
+.birthday-tasks div {
+    padding: 15px 0;
+
+    border-bottom: 1px solid #f5dce9;
+
+    color: #70566a;
+}
+
+
+.birthday-tasks div:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final-content {
+
+    min-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.heart {
+    font-size: 68px;
+
+    margin-bottom: 20px;
+
+    animation: heartbeat 1.5s infinite;
+}
+
+
+.final-content h1 {
+
+    font-size: 46px;
+
+    color: #17659a;
+}
+
+
+.final-content p {
+
+    margin-top: 18px;
+
+    color: #5f7d90;
+
+    line-height: 1.7;
+}
+
+
+.final-line {
+
+    width: 65px;
+
+    height: 2px;
+
+    background: #8ac9ed;
+
+    margin: 30px 0;
+}
+
+
+.signature {
+    color: #7694a7;
+}
+
+
+.from {
+    margin-top: 35px;
+
+    font-weight: 700;
+
+    color: #3979a2 !important;
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes float {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.12);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.08);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    #missionContent h1 {
+        font-size: 32px;
+    }
+
+    .reveal h1 {
+        font-size: 48px !important;
+    }
+
+}
+```css
+/* ==========================================
+   DENNIS ADMIN MODE
+========================================== */
+
+.admin-page {
+
+    min-height: 100vh;
+
+    padding: 25px 20px;
+
+    max-width: 700px;
+
+    margin: auto;
+
+}
+
+
+.admin-card {
+
+    min-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+}
+
+
+.admin-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.admin-card h1 {
+
+    color: #175987;
+
+    font-size: 30px;
+
+}
+
+
+.admin-card p {
+
+    color: #6c8ca1;
+
+    margin-top: 8px;
+
+}
+
+
+.admin-card input {
+
+    width: 100%;
+
+    max-width: 300px;
+
+    padding: 16px;
+
+    margin-top: 30px;
+
+    border-radius: 14px;
+
+    border: 2px solid #ccecff;
+
+    background: rgba(255,255,255,.9);
+
+    text-align: center;
+
+    font-size: 18px;
+
+    outline: none;
+
+}
+
+
+.admin-btn {
+
+    width: 100%;
+
+    max-width: 300px;
+
+    margin-top: 12px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4bb8ef,
+            #2879c4
+        );
+
+    color: white;
+
+    font-weight: 800;
+
+}
+
+
+.login-error {
+
+    color: #e66b7a !important;
+
+    min-height: 20px;
+
+}
+
+
+/* ADMIN HEADER */
+
+.admin-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.admin-label {
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: #6c9bbb;
+
+}
+
+
+.admin-header h1 {
+
+    margin-top: 5px;
+
+    color: #175987;
+
+}
+
+
+.logout-btn {
+
+    border: none;
+
+    background: rgba(255,255,255,.8);
+
+    color: #55778d;
+
+    padding: 9px 14px;
+
+    border-radius: 20px;
+
+}
+
+
+/* STATUS */
+
+.admin-status {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.admin-status div {
+
+    background: rgba(255,255,255,.8);
+
+    border-radius: 16px;
+
+    padding: 15px;
+
+    box-shadow:
+        0 5px 15px rgba(50,130,180,.08);
+
+}
+
+
+.admin-status span {
+
+    display: block;
+
+    color: #7895a7;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.admin-status strong {
+
+    color: #24668e;
+
+}
+
+
+/* SECTION */
+
+.admin-section {
+
+    margin-bottom: 25px;
+
+}
+
+
+.admin-date {
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color: #5985a0;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* MISSION */
+
+.admin-mission-card {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: rgba(255,255,255,.88);
+
+    border-radius: 18px;
+
+    padding: 16px;
+
+    margin-bottom: 10px;
+
+    box-shadow:
+        0 5px 18px rgba(50,130,180,.08);
+
+}
+
+
+.admin-mission-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.admin-mission-number {
+
+    width: 36px;
+
+    height: 36px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #e0f4ff;
+
+    color: #2878a8;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.admin-mission-title {
+
+    font-weight: 800;
+
+    color: #275c7d;
+
+}
+
+
+.admin-mission-subtitle {
+
+    font-size: 12px;
+
+    color: #819aaa;
+
+    margin-top: 3px;
+
+}
+
+
+.unlock-btn {
+
+    border: none;
+
+    padding: 10px 13px;
+
+    border-radius: 12px;
+
+    background: #287fc0;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.admin-unlocked {
+
+    color: #29966b;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+/* INFO */
+
+.admin-info {
+
+    background: rgba(255,255,255,.8);
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    line-height: 2;
+
+    color: #52758b;
+
+}
+
+
+/* DANGER */
+
+.danger-zone {
+
+    margin-top: 40px;
+
+}
+
+
+.reset-btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    border: 1px solid #f0b8c0;
+
+    background: rgba(255,240,243,.8);
+
+    color: #c35e6b;
+
+    font-weight: 700;
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin-header h1 {
+
+        font-size: 27px;
+
+    }
+
+    .admin-mission-card {
+
+        align-items: flex-start;
+
+    }
+
+    .admin-mission-action {
+
+        flex-shrink: 0;
+
+    }
+
+}
+```css
+/* ==========================================
+   RESET ALL LOCKS
+========================================== */
+
+.reset-lock-btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    border-radius: 14px;
+
+    border: 1px solid #9cc9df;
+
+    background: rgba(235, 248, 255, 0.95);
+
+    color: #286b91;
+
+    font-weight: 800;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.reset-lock-btn:active {
+
+    transform: scale(0.98);
+
+}
+```
+.reset-lock-btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    border-radius: 14px;
+
+    border: 1px solid #9cc9df;
+
+    background: rgba(235, 248, 255, 0.95);
+
+    color: #286b91;
+
+    font-weight: 800;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.reset-lock-btn:active {
+
+    transform: scale(0.98);
+
+}
+/* ==========================================
+   PHOTO MISSION
+========================================== */
+
+.photo-task {
+
+    margin-top: 25px;
+
+    text-align: center;
+
+}
+
+
+.photo-btn {
+
+    width: 100%;
+
+    padding: 16px 20px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: #17659a;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(
+            23,
+            101,
+            154,
+            0.20
+        );
+
+}
+
+
+.photo-btn:active {
+
+    transform: scale(0.98);
+
+}
+
+
+.photo-preview {
+
+    margin-top: 18px;
+
+}
+
+
+.photo-preview img {
+
+    width: 100%;
+
+    max-height: 360px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+
+    display: block;
+
+}
+
+
+.photo-success {
+
+    margin-top: 10px;
+
+    color: #17659a;
+
+    font-weight: 700;
+
+}
+
+
+.photo-complete {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+}
+
+
+.photo-complete:disabled {
+
+    opacity: 0.45;
+
+    cursor: not-allowed;
+
+}
