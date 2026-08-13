@@ -359,111 +359,135 @@ const missions = [
     // ==========================================
 
     {
-        id: 7,
-        title: "Mission 07",
-        shortTitle: "Birthday Morning",
-        unlock: "2026-08-21T10:00:00+08:00",
-        type: "birthday",
+    id: 7,
 
-        content: `
-            <div class="mission-number">21 AUGUST</div>
+    title: "Mission 07",
 
-            <h1>
-                Birthday Morning 🎂
-            </h1>
+    shortTitle: "Tomorrow Morning",
 
-            <p>
-                Good morning, Birthday Girl. ❤️
-            </p>
+    unlock: "2026-08-20T23:30:00+08:00",
 
-            <p>
-                今日係屬於你嘅一日。
-            </p>
+    type: "birthday",
 
-            <div class="birthday-tasks">
+    content: `
+        <div class="mission-number">20 AUGUST · 23:30</div>
 
-                <div>
-                    ☀️ 好好享受今日
-                </div>
+        <h1>
+            One Last Thing Tonight 🌙
+        </h1>
 
-                <div>
-                    🍜 食啲好食嘅嘢
-                </div>
+        <p>
+            今日嘅 Mission 差唔多完成喇。
+        </p>
 
-                <div>
-                    📸 留低一啲回憶
-                </div>
+        <div class="classified">
 
-            </div>
+            🌙 GOOD NIGHT<br><br>
 
-            <p>
-                不過今晚……
-            </p>
+            <strong>
+                明天早上 9:30 起身。
+            </strong>
 
-            <p>
-                <strong>
-                    仲有一個重要 Mission。
-                </strong>
-            </p>
+        </div>
 
-            <button class="complete-btn">
-                LET'S START ❤️
-            </button>
-        `
-    },
+        <p>
+            起身之後，
+        </p>
+
+        <h2>
+            打開 Mission 08 🔐
+        </h2>
+
+        <p>
+            唔好偷睇其他 Mission。
+        </p>
+
+        <p>
+            明天嘅行程……<br>
+            <strong>正式開始。</strong> ❤️
+        </p>
+
+        <button class="complete-btn">
+            GOOD NIGHT 🌙
+        </button>
+    `
+},
 
 
     {
-        id: 8,
-        title: "Mission 08",
-        shortTitle: "Birthday Dinner",
-        unlock: "2026-08-21T17:15:00+08:00",
-        type: "birthday",
+    id: 8,
 
-        content: `
-            <div class="mission-number">MISSION 08</div>
+    title: "Mission 08",
 
-            <h1>
-                Birthday Dinner 🎂
-            </h1>
+    shortTitle: "Morning Mission",
 
-            <p>
-                今晚有一個地方，
-                我諗你應該會鍾意。
-            </p>
+    unlock: "2026-08-21T09:30:00+08:00",
 
-            <p>
-                Hint #1 🍽️
-            </p>
+    type: "birthday",
 
-            <p>
-                Hint #2 👀
-            </p>
+    content: `
+        <div class="mission-number">21 AUGUST · 09:30</div>
 
-            <p>
-                Hint #3
-                <br>
-                <strong>
-                    今晚唔需要你決定食咩。
-                </strong>
-            </p>
+        <h1>
+            Good Morning ☀️
+        </h1>
 
-            <div class="classified">
+        <p>
+            早晨，Birthday Girl。❤️
+        </p>
 
-                🕔 17:45
+        <p>
+            今日早上有一個秘密活動。
+        </p>
 
-                <br><br>
+        <div class="birthday-tasks">
 
-                Birthday Dinner
-
+            <div>
+                🌸 <strong>不能噴香水</strong>
             </div>
 
-            <button class="complete-btn">
-                SHOW ME ❤️
-            </button>
-        `
-    },
+            <div>
+                💎 <strong>不能帶耳環</strong>
+            </div>
 
+            <div>
+                ⏰ <strong>10:30 前準備好</strong>
+            </div>
+
+            <div>
+                🚪 <strong>10:30 出門口</strong>
+            </div>
+
+        </div>
+
+        <div class="classified">
+
+            ⚠️ IMPORTANT ⚠️
+
+            <br><br>
+
+            唔需要問去邊。
+            <br>
+            唔需要估今日做咩。
+
+            <br><br>
+
+            <strong>
+                準時出門口就可以。 ❤️
+            </strong>
+
+        </div>
+
+        <p>
+            Your morning adventure<br>
+            starts now.
+        </p>
+
+        <button class="complete-btn">
+            I'M READY ❤️
+        </button>
+    `
+},
 
     {
         id: 9,
