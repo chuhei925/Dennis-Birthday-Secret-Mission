@@ -67,7 +67,7 @@ const missions = [
             <div class="birthday-tasks">
 
                 <div>
-                    🍜 食午餐
+                    🍜 食午餐(打開電話Case睇下❤️)
                 </div>
 
                 <div>
