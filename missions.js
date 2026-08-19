@@ -48,7 +48,7 @@ const missions = [
         id: 2,
         title: "Mission 02",
         shortTitle: "Fuel Up",
-        unlock: "2026-08-20T14:00:00+08:00",
+        unlock: "2026-08-20T12:30:00+08:00",
         type: "food",
 
         content: `
